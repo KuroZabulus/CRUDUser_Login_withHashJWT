@@ -7,6 +7,10 @@ This is also an environment to practice working on an actual production-level pr
 + Force self to code according to some popular design pattern (Repository, Unit of Work, Dependency Injection, Blue-Green, etc.)
 After this is done, this project will be remade in Java via Spring Boot
 Also DevOps stuff if I am fluent enough in these full-stack stuff first
+OH and also, practice good git work ethics by:
++ Every task must be worked on and pushed to a separate branch for merging
++ Check merge request every time and merge accordingly
+(this doesn't work that well with a single person working but will try my best to emulate such process)
 
 Technology used (or to be used):
 Language used: C#
@@ -23,6 +27,7 @@ Framework used: .NET 8
 TODO list:
 [x] Login and register function
 [x] Implement basic security via jwt token and password hashing
+[x] Create Taiga project and tasks
 [] Setup an email sender for many related tasks
 [] Add more related objects with medium-high relationship complexity 
 [] CRUD functions and other misc. functions for all objects
