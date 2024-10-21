@@ -1,0 +1,7 @@
+﻿//Run this in Repository project
+dotnet ef migrations add <What has changed in this migration> --project .\Repository\ --startup-project .\CRUDUser_Login_withHashJWT\
+
+//Run this in CRUDUser_Login_withHashJWT project
+dotnet ef database update
+//Or run this in the current project
+dotnet ef database update --project .\Repository\ --startup-project .\CRUDUser_Login_withHashJWT\
