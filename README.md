@@ -11,6 +11,9 @@ OH and also, practice good git work ethics by:
 + Every task must be worked on and pushed to a separate branch for merging
 + Check merge request every time and merge accordingly
 (this doesn't work that well with a single person working but will try my best to emulate such process)
+Ok so both my personal acc and school acc is working on this repo, so how this will work is that:
++ I will do work on my school, push to separate branch following naming scheme (MyName_#TaskNo.-TaskSummary)
++ Then swap to my personal, check and approve merge request (will merge most of the time without conflict but f- it we ball)
 
 Technology used (or to be used):
 Language used: C#
