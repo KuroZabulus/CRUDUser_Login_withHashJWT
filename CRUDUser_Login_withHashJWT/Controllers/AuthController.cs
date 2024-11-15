@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Repository;
+using Repository.DTO.FormModel;
 using Repository.DTO.ValidationModel;
 using Service.Implement;
 using Service.Interface;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CRUDUser_Login_withHashJWT.Controllers
 {
@@ -24,12 +26,13 @@ namespace CRUDUser_Login_withHashJWT.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        [SwaggerOperation(Summary = "Login return jwt token")]
+        public async Task<IActionResult> Login([FromForm] LoginModel login)
         {
             try
             {
                 _unitOfWork.BeginTransaction();
-                var result = await _service.Login(username, password);
+                var result = await _service.Login(login.Username, login.Password);
 
                 _unitOfWork.SaveChanges();
                 _unitOfWork.CommitTransaction();
@@ -43,6 +46,7 @@ namespace CRUDUser_Login_withHashJWT.Controllers
         }
 
         [HttpPost("register")]
+        [SwaggerOperation(Summary = "Register new account with hashed password")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO info)
         {
             if (!ModelState.IsValid)

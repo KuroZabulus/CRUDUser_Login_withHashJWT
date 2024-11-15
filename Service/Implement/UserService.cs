@@ -1,4 +1,5 @@
-﻿using Repository.DataAccess.Interface;
+﻿using Microsoft.AspNetCore.Http;
+using Repository.DataAccess.Interface;
 using Repository.DTO.ViewModel;
 using Service.Interface;
 using System;
@@ -46,6 +47,11 @@ namespace Service.Implement
         public Task<UserViewModel> GetUserByUsernameAsync(string username)
         {
             return userRepository.GetUserByUsernameAsync(username);
+        }
+
+        public Task<string> UpdateImageAvatar(IFormFile? image)
+        {
+            return userRepository.UpdateImageAvatar(image);
         }
     }
 }

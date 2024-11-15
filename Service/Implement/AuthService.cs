@@ -12,10 +12,12 @@ namespace Service.Implement
     public class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepository;
+        private readonly IEmailSender _emailSender;
 
-        public AuthService(IAuthRepository authRepository)
+        public AuthService(IAuthRepository authRepository, IEmailSender emailSender)
         {
             _authRepository = authRepository;
+            _emailSender = emailSender;
         }
 
         public async Task<string> Login(string username, string password)
@@ -26,6 +28,13 @@ namespace Service.Implement
         public async Task<string> Register(RegisterDTO info)
         {
             return await _authRepository.Register(info);
+            /*var result = await _authRepository.Register(info);
+            if (result.StartsWith("Check email for confirmation"))
+            {
+                var subject = "Account Verification";
+                var message = _emailSender.GetMailBodyBasicRole(info.Username, info.Password);
+                await _emailSender.EmailSendAsync(info.Email, subject, message);
+            }*/
         }
     }
 }

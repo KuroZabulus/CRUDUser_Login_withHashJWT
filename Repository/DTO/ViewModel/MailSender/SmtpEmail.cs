@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.DTO.ViewModel
+namespace Repository.DTO.ViewModel.MailSender
 {
     public class SmtpEmail
     {
@@ -13,5 +13,6 @@ namespace Repository.DTO.ViewModel
         public bool EnableSsl { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Name { get; set; }
     }
 }

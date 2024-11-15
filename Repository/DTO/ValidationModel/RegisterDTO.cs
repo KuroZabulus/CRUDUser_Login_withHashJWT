@@ -12,18 +12,22 @@ namespace Repository.DTO.ValidationModel
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẮẰẲẴẶắằẳẵặƯứừửữự]+$", ErrorMessage = "UserName must not contain special characters.")]
         [MinLength(5, ErrorMessage = "User name must be at least 5 characters long.")]
+        ///<example>5Length</example>
         public string Username { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Password must be at least 8 characters long", MinimumLength = 8)]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[a-z])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Password must contain at least one uppercase letter, one number, and one character")]
+        ///<example>@12Three45</example>
         public string Password { get; set; }
 
         [Required]
+        ///<example>1,2,3</example>
         public int RoleId { get; set; }
 
         [Required]
         [RegularExpression(@"^0\d{9}$", ErrorMessage = "Phone number must be between 0 and 10 digits long.")]
+        ///<example>0123456789</example>
         public string PhoneNumber { get; set; }
 
         [Required]

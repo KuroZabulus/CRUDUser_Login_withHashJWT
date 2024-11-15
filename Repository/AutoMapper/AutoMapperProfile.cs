@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Repository.Data;
+using Repository.Data.Entities;
 using Repository.DTO;
 using Repository.DTO.ViewModel;
 using System;

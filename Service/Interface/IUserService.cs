@@ -1,4 +1,5 @@
-﻿using Repository.Data;
+﻿using Microsoft.AspNetCore.Http;
+using Repository.Data;
 using Repository.DTO.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ namespace Service.Interface
         Task<UserViewModel> GetUserByIdAsync(int id);
         Task<UserViewModel> GetUserByPhoneNumberAsync(string phone);
         Task<UserViewModel> GetUserByEmailAsync(string email);
+        Task<string> UpdateImageAvatar(IFormFile? image);
     }
 }

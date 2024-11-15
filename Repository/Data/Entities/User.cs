@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Data
+namespace Repository.Data.Entities
 {
     public class User
     {
@@ -29,6 +29,9 @@ namespace Repository.Data
 
         [ForeignKey("RoleId")]
         public Role? Role { get; set; }
+
+        public virtual ICollection<Post>? Posts { get; set; }
+        public virtual ICollection<Comment>? Comments { get; set; }
 
     }
 }

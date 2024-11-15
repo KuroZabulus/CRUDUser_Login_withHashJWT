@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Repository.AutoMapper;
 using Repository.Data;
-using Repository.DTO.ViewModel;
+using Repository.DTO.ViewModel.MailSender;
 using Repository.TokenHandler;
 using Service;
 using System.Text;

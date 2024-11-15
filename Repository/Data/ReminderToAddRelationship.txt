@@ -1,0 +1,12 @@
+﻿add the proper relationship to all related object
+then go into DbContext to explicitly declare relationships
+example: comment 1-n post then comment has singular object Post and post has collection object Comments
+then in DbContext:
+builder.Entity<Post>()
+                .HasMany(p => p.Comments) // 1 post to N comments (object p here is Post type)
+                .WithOne(p => p.Post) // 1 comment to 1 post (object p here is Comment type)
+                .HasForeignKey(p => p.PostId) //declare foreign key (object p here is Comment type)
+                .OnDelete(DeleteBehavior.NoAction); // Prevent cascade delete
+
+Singular object (1 to): public <T> Related1Object;
+Collection object (n to): public ICollection<T> RelatedManyObjects;

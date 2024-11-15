@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Project_Cursus_Group3.Data;
 using Repository.Data;
+using Repository.Data.Entities;
 using Repository.DataAccess.Interface;
 using Repository.DTO.ValidationModel;
 using Repository.TokenHandler;
@@ -57,10 +59,12 @@ namespace Repository.DataAccess.Implement
 
                 if (info.RoleId == 1) 
                 {
+                    //send confirmation email
                     info.Status = "active";
                 }
                 if (info.RoleId == 2 || info.RoleId == 3)
                 {
+                    //send verification email
                     info.Status = "pending";
                 }
                 User user = new User
@@ -83,10 +87,11 @@ namespace Repository.DataAccess.Implement
                 {
                     return "Register successful.";
                 }
-                else if (info.RoleId == 2)
+                else if (info.RoleId == 2 || info.RoleId == 3)
                 {
                     return "Check email for confirmation.";
                 }
+                //this case is mainly for any other role that comes up in between
                 return "User registered successfully.";
             }
             catch (Exception ex)
