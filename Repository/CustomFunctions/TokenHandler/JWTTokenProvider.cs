@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.TokenHandler
+namespace Repository.CustomFunctions.TokenHandler
 {
     public sealed class JWTTokenProvider(IConfiguration config)
     {

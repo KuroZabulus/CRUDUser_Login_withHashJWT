@@ -71,6 +71,7 @@ namespace CRUDUser_Login_withHashJWT.Controllers
         }
         [HttpPost("upload-avatar")]
         [SwaggerOperation(Summary = "Don't FromForm the IFormFile as it's already implied")]
+        ///<summary>"Don't FromForm the IFormFile as it's already implied"</summary>
         public async Task<IActionResult> UploadImageAvatar(string userName, UpdateProfileAvatarModel update)
         {
             try
@@ -104,7 +105,8 @@ namespace CRUDUser_Login_withHashJWT.Controllers
         }
 
         [HttpPost("upload-image")]
-        [SwaggerOperation(Summary = "Will prioritize update/image param before avatar param")]
+        [SwaggerOperation(Summary = "Don't FromForm the IFormFile as it's already implied")]
+        ///<summary>"Don't FromForm the IFormFile as it's already implied"</summary>
         public async Task<IActionResult> UploadImage(IFormFile image)
         {
             try
@@ -117,6 +119,27 @@ namespace CRUDUser_Login_withHashJWT.Controllers
                     throw new ArgumentException("No image was given!");
                 }
                 var result = await _userService.UpdateImageAvatar(image);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _unitOfWork.RollbackTransaction();
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("generate-certificate")]
+        public async Task<IActionResult> GenerateCertificate(string username, string subject)
+        {
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                if(username == null || subject == null)
+                {
+                    _unitOfWork.RollbackTransaction();
+                    throw new ArgumentException("Missing argument!");
+                }
+                var result = await _userService.GenerateCertificate(username, subject);
                 return Ok(result);
             }
             catch (Exception ex)

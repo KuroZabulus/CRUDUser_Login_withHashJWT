@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Http;
 using Repository.Data;
 using Repository.DTO.ViewModel;
 using System;
@@ -19,5 +20,6 @@ namespace Service.Interface
         Task<UserViewModel> GetUserByPhoneNumberAsync(string phone);
         Task<UserViewModel> GetUserByEmailAsync(string email);
         Task<string> UpdateImageAvatar(IFormFile? image);
+        Task<string> GenerateCertificate(string username,string subject);
     }
 }

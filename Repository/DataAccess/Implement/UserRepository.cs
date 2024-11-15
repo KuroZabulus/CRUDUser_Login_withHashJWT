@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Project_Cursus_Group3.Data;
+using Repository.CustomFunctions.SupabaseFileUploader;
 using Repository.Data;
 using Repository.Data.Entities;
 using Repository.DataAccess.Interface;
 using Repository.DTO.ViewModel;
-using Repository.SupabaseFileUploader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +30,15 @@ namespace Repository.DataAccess.Implement
             _context = dbContext;
             _mapper = mapper;
             _fileUploader = fileUploader;
+        }
+
+        public async Task<string> GenerateCertificate(string username, string subject)
+        {
+            if(username == null || subject == null)
+            {
+                return "Missing information!";
+            }
+
         }
 
         public async Task<IEnumerable<UserViewModel>> GetAllUserAsync()
