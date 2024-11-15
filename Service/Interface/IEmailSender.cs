@@ -10,6 +10,8 @@ namespace Service.Interface
     {
         Task<bool> EmailSendAsync(string email, string subject, string message);
 
-        string GetMailBody(string username, string password);
+        string GetMailBodyBasicRole(string username, string password);
+
+        string GetMailBodyAdvancedRole(string username, string password);
     }
 }

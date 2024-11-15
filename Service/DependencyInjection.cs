@@ -10,6 +10,7 @@ namespace Service
         {
             service.AddTransient<IUserService, UserService>();
             service.AddTransient<IAuthService, AuthService>();
+            service.AddScoped<IEmailSender, EmailSenderService>();
 
             return service;
         }

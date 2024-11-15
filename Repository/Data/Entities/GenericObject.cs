@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Repository.Data.Entities
 {
-    public class Role
+    public class GenericObject
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public virtual ICollection<User>? Users { get; set; }
-
+        public decimal Value { get; set; }
     }
 }

@@ -15,8 +15,12 @@ namespace Repository.Data.Entities
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
         public int UserId { get; set; }
+        public int PostId { get; set; }
 
         [ForeignKey("UserId")]
-        public User? Author { get; set; }
+        public User Author { get; set; }
+
+        [ForeignKey("PostId")]
+        public Post Post { get; set; }
     }
 }
