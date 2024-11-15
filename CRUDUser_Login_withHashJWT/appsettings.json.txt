@@ -12,21 +12,21 @@
     "Host": "smtp.gmail.com",
     "Port": 587,
     "EnableSsl": true,
-    "Username": "ttssteamclone24@gmail.com",
-    "Password": "lzvstgjroifbvtxf",
+    "Username": "<Add your email>",
+    "Password": "<Get your email's app password>",
     "DefaultCredentials": false,
     "Name": "Wuthering Height"
   },
   "Jwt": {
-    "Secret": "F0bX7KkfnN8Ip4clSfaNOIiLzPnN/rx4sAmuZ9CBsBBVbcOiekv7sQ4IbywPyADCQ+VmwG06JjjdC+HcJ8ojKg==",
+    "Secret": "<Random string here idk>",
     "Issuer": "CRUDUser",
     "Audience": "account",
     "ExpirationTime": 30
   },
   "Supabase": {
-    "Url": "https://bofqhlyzamsvhhazovfr.supabase.co",
-    "PrivateKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvZnFobHl6YW1zdmhoYXpvdmZyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMTY2MTQ0OCwiZXhwIjoyMDQ3MjM3NDQ4fQ.k5AbSBdFfju0AmGgNIMSxTbSe2ZqAabd-4vm1dP5Lqg",
-    "PublicKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvZnFobHl6YW1zdmhoYXpvdmZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE2NjE0NDgsImV4cCI6MjA0NzIzNzQ0OH0.pGCUXfUW4w-FlstLELXaNyYe40pzkHvZU_yhrribwO0"
+    "Url": "<Add your own Supabase url>",
+    "PrivateKey": "<Add your own key>",
+    "PublicKey": "<Add your own key>"
   },
   "Host": {
     "https": "https://localhost:5218"
