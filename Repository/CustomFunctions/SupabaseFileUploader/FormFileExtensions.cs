@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.SupabaseFileUploader
+namespace Repository.CustomFunctions.SupabaseFileUploader
 {
     public static class FormFileExtensions
     {

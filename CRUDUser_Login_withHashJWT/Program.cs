@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
-using Repository.AutoMapper;
+using Repository.CustomFunctions.AutoMapper;
+using Repository.CustomFunctions.TokenHandler;
 using Repository.Data;
 using Repository.DTO.ViewModel.MailSender;
-using Repository.TokenHandler;
 using Service;
 using System.Text;
 

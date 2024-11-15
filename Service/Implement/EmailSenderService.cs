@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeKit;
+using Repository.CustomFunctions.TokenHandler;
 using Repository.Data;
 using Repository.DTO.ValidationModel;
-using Repository.TokenHandler;
 using Service.Interface;
 using System;
 using System.Collections.Generic;

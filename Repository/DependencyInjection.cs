@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
+using Repository.CustomFunctions.SupabaseFileUploader;
 using Repository.DataAccess.Implement;
 using Repository.DataAccess.Interface;
-using Repository.SupabaseFileUploader;
 
 namespace Repository
 {
@@ -30,6 +30,7 @@ namespace Repository
             service.AddTransient<IAuthRepository, AuthRepository>();
             service.AddScoped<IAuthRepository, AuthRepository>();
             service.AddTransient<UploadFile>();
+            //service.AddTransient<UploadFile>();
 
             return service;
         }
