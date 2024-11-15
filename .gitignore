@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Custom file
+/CRUDUser_Login_withHashJWT/appsettings.json
+
+/CRUDUser_Login_withHashJWT/appsettings.json.txt
