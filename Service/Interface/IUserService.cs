@@ -20,6 +20,6 @@ namespace Service.Interface
         Task<UserViewModel> GetUserByPhoneNumberAsync(string phone);
         Task<UserViewModel> GetUserByEmailAsync(string email);
         Task<string> UpdateImageAvatar(IFormFile? image);
-        Task<string> GenerateCertificate(string username,string subject);
+        Task<string> CreateCertificate(string username,string subject);
     }
 }

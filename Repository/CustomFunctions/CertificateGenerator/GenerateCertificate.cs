@@ -6,17 +6,23 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Repository.CustomFunctions.CertificateGenerator
 {
-    public class GenerateCertificate
+    public static class GenerateCertificate
     {
-        static void CertificateGenerator()
+        public async static Task<IFormFile> CertificateGenerator(string username, string subject)
         {
-            int width = 600;
-            int height = 400;
+            int originalWidth = 600;
+            int originalHeight = 400;
+            int newWidth = 1000;
+            int newHeight = 667;
 
-            using (Bitmap bitmap = new Bitmap(width, height))
+            float scaleX = (float)newWidth / originalWidth;
+            float scaleY = (float)newHeight / originalHeight;
+
+            using (Bitmap bitmap = new Bitmap(newWidth, newHeight))
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 //This first part is for the background graphics
@@ -31,37 +37,37 @@ namespace Repository.CustomFunctions.CertificateGenerator
 
                 //aqua infront (short sq line is 125, long sq line is 300)
                 PointF[] triangle1Points = {
-                new PointF(0, 280),
-                new PointF(300, 400),
-                new PointF(0, 400)
-            };
+                    new PointF(0 * scaleX, 280 * scaleY),
+                    new PointF(300 * scaleX, 400 * scaleY),
+                    new PointF(0 * scaleX, 400 * scaleY)
+                };
 
                 //gold under (short sq line is 125, long sq line is 185, away from edge 40)
                 PointF[] triangle2Points = {
-                new PointF(0, 235),
-                new PointF(0, 360),
-                new PointF(185, 360)
-            };
+                    new PointF(0 * scaleX, 235 * scaleY),
+                    new PointF(0 * scaleX, 360 * scaleY),
+                    new PointF(185 * scaleX, 360 * scaleY)
+                };
 
                 //aqua infront
                 PointF[] triangle3Points = {
-                new PointF(600, 0),
-                new PointF(600, 125),
-                new PointF(300, 0)
-            };
+                    new PointF(600 * scaleX, 0 * scaleY),
+                    new PointF(600 * scaleX, 125 * scaleY),
+                    new PointF(300 * scaleX, 0 * scaleY)
+                };
 
                 //gold under
                 PointF[] triangle4Points = {
-                new PointF(600, 40),
-                new PointF(600, 165),
-                new PointF(415, 40)
-            };
+                    new PointF(600 * scaleX, 40 * scaleY),
+                    new PointF(600 * scaleX, 165 * scaleY),
+                    new PointF(415 * scaleX, 40 * scaleY)
+                };
 
                 //outer bg rect white fill no border outline
-                Rectangle rect1 = new Rectangle(40, 40, width - 80, height - 80);
+                Rectangle rect1 = new Rectangle((int)(40 * scaleX), (int)(40 * scaleY), (int)(newWidth - 80 * scaleX), (int)(newHeight - 80 * scaleY));
 
                 //inner bg rect no fill gold border outline
-                Rectangle rect2 = new Rectangle(55, 55, width - 110, height - 110);
+                Rectangle rect2 = new Rectangle((int)(55 * scaleX), (int)(55 * scaleY), (int)(newWidth - 110 * scaleX), (int)(newHeight - 110 * scaleY));
 
                 using (SolidBrush brush2 = new SolidBrush(color2))
                 {
@@ -85,55 +91,52 @@ namespace Repository.CustomFunctions.CertificateGenerator
                     graphics.DrawRectangle(goldPen, rect2);
                 }
 
+                using (Pen goldPen = new Pen(Color.Gold, 3))
+                {
+                    graphics.DrawRectangle(goldPen, rect1);
+                }
+
                 //This second part is for the text details
-                Image image1 = Image.FromFile("..\\..\\..\\Icon\\-45.png");
-                Image image2 = Image.FromFile("..\\..\\..\\Icon\\dog.png");
-                string userName = "Mr.Vinny";
-                string subject = "How to Win Rate 101";
+                Image image1 = Image.FromFile("Icon\\-45.png");
+                Image image2 = Image.FromFile("Icon\\dog.png");
+
                 string completionDate = DateTime.Now.ToString("MMMM dd, yyyy");
                 string issuer = "Dante Limbus";
 
                 // Set font
-                Font titleh1Font = new Font("Times New Roman", 36, FontStyle.Bold);
-                Font titleh2Font = new Font("Times New Roman", 32, FontStyle.Bold);
-                Font titleh3Font = new Font("Times New Roman", 28, FontStyle.Bold);
-                Font titleh4Font = new Font("Times New Roman", 24, FontStyle.Bold);
-                Font titleh5Font = new Font("Times New Roman", 20, FontStyle.Bold);
-                Font textFontNorm = new Font("Times New Roman", 16);
-                Font textFontBold = new Font("Times New Roman", 16, FontStyle.Bold);
-                Font textFontItal = new Font("Times New Roman", 16, FontStyle.Italic);
-                Font textFontSmall = new Font("Times New Roman", 12);
-                Font nameFont = new Font("Edwardian Script ITC", 24);
-                Font sigFontBold = new Font("Arial", 8, FontStyle.Bold);
-
-                // Set string format
-                /*
-                StringFormat format = new StringFormat();
-                format.LineAlignment = StringAlignment.Center;
-                format.Alignment = StringAlignment.Center;
-                */
+                Font titleh1Font = new Font("Times New Roman", 36 * scaleY, FontStyle.Bold);
+                Font titleh2Font = new Font("Times New Roman", 32 * scaleY, FontStyle.Bold);
+                Font titleh3Font = new Font("Times New Roman", 28 * scaleY, FontStyle.Bold);
+                Font titleh4Font = new Font("Times New Roman", 24 * scaleY, FontStyle.Bold);
+                Font titleh5Font = new Font("Times New Roman", 20 * scaleY, FontStyle.Bold);
+                Font textFontNorm = new Font("Times New Roman", 16 * scaleY);
+                Font textFontBold = new Font("Times New Roman", 16 * scaleY, FontStyle.Bold);
+                Font textFontItal = new Font("Times New Roman", 16 * scaleY, FontStyle.Italic);
+                Font textFontSmall = new Font("Times New Roman", 12 * scaleY);
+                Font nameFont = new Font("Edwardian Script ITC", 24 * scaleY);
+                Font sigFontBold = new Font("Arial", 8 * scaleY, FontStyle.Bold);
 
                 // Draw title
                 string title1 = "Certificate";
                 string title2 = "of Achievement";
                 SizeF titleSize1 = graphics.MeasureString(title1, titleh2Font);
                 SizeF titleSize2 = graphics.MeasureString(title2, textFontBold);
-                graphics.DrawString(title1, titleh2Font, Brushes.Black, (width - titleSize1.Width) / 2, 60);
-                graphics.DrawString(title2, textFontBold, Brushes.Black, (width - titleSize2.Width) / 2, titleSize1.Height + 30 + titleSize2.Height);
+                graphics.DrawString(title1, titleh2Font, Brushes.Black, (newWidth - titleSize1.Width) / 2, 60 * scaleY);
+                graphics.DrawString(title2, textFontBold, Brushes.Black, (newWidth - titleSize2.Width) / 2, titleSize1.Height + 30 * scaleY + titleSize2.Height);
 
                 // Draw user name
                 SolidBrush brushUName = new SolidBrush(color1);
                 SolidBrush brushUText = new SolidBrush(ColorTranslator.FromHtml("#ac9552"));
                 string userText = "This certificate is present to";
                 SizeF userTextSize = graphics.MeasureString(userText, textFontSmall);
-                SizeF userNameSize = graphics.MeasureString(userName, nameFont);
-                graphics.DrawString(userText, textFontSmall, brushUText, (width - userTextSize.Width) / 2, 155);
-                graphics.DrawString(userName, nameFont, brushUName, (width - userNameSize.Width) / 2, 175);
+                SizeF userNameSize = graphics.MeasureString(username, nameFont);
+                graphics.DrawString(userText, textFontSmall, brushUText, (newWidth - userTextSize.Width) / 2, 155 * scaleY);
+                graphics.DrawString(username, nameFont, brushUName, (newWidth - userNameSize.Width) / 2, 175 * scaleY);
 
                 // Draw underline under the username
-                float underlineStartX = (width - userNameSize.Width) / 2 - 25;
-                float underlineEndX = underlineStartX + userNameSize.Width + 50;
-                float underlineY = 175 + userNameSize.Height / 2 + 8; // Adjust the Y position as needed
+                float underlineStartX = (newWidth - userNameSize.Width) / 2 - 25 * scaleX;
+                float underlineEndX = underlineStartX + userNameSize.Width + 50 * scaleX;
+                float underlineY = 175 * scaleY + userNameSize.Height / 2 + 8 * scaleY; // Adjust the Y position as needed
                 using (Pen underlinePen = new Pen(Color.Black, 1))
                 {
                     graphics.DrawLine(underlinePen, underlineStartX, underlineY, underlineEndX, underlineY);
@@ -143,34 +146,41 @@ namespace Repository.CustomFunctions.CertificateGenerator
                 string subjectText = "for their excellent performance in";
                 SizeF subjectTextSize = graphics.MeasureString(subjectText, textFontSmall);
                 SizeF subjectSize = graphics.MeasureString(subject, titleh5Font);
-                graphics.DrawString(subjectText, textFontSmall, brushUText, (width - subjectTextSize.Width) / 2, 220);
-                graphics.DrawString(subject, titleh5Font, brushUName, (width - subjectSize.Width) / 2, 240);
+                graphics.DrawString(subjectText, textFontSmall, brushUText, (newWidth - subjectTextSize.Width) / 2, 220 * scaleY);
+                graphics.DrawString(subject, titleh5Font, brushUName, (newWidth - subjectSize.Width) / 2, 240 * scaleY);
 
                 // Insert the image into the bitmap
                 // Adjust the position and size as needed
-                Image resizedImage1 = ResizeImage(image1, 45, 45);
-                Image resizedImage2 = ResizeImage(image2, 60, 45);
-                graphics.DrawImage(resizedImage1, new Rectangle(90, 70, resizedImage1.Width, resizedImage1.Height));
-                graphics.DrawImage(resizedImage2, new Rectangle(width - 150, 70, resizedImage2.Width, resizedImage2.Height));
+                Image resizedImage1 = ResizeImage(image1, (int)(45 * scaleX), (int)(45 * scaleY));
+                Image resizedImage2 = ResizeImage(image2, (int)(60 * scaleX), (int)(45 * scaleY));
+                graphics.DrawImage(resizedImage1, new Rectangle((int)(90 * scaleX), (int)(70 * scaleY), resizedImage1.Width, resizedImage1.Height));
+                graphics.DrawImage(resizedImage2, new Rectangle((int)(newWidth - 150 * scaleX), (int)(70 * scaleY), resizedImage2.Width, resizedImage2.Height));
 
                 // Draw issuer and the signing line
-                float signUnderlineStartX = width - 210;
-                float signUnderlineEndX = signUnderlineStartX + 125;
-                float signUnderlineY = height - 95;
+                float signUnderlineStartX = newWidth - 210 * scaleX;
+                float signUnderlineEndX = signUnderlineStartX + 125 * scaleX;
+                float signUnderlineY = newHeight - 95 * scaleY;
                 using (Pen underlinePen = new Pen(Color.Black, 1))
                 {
                     graphics.DrawLine(underlinePen, signUnderlineStartX, signUnderlineY, signUnderlineEndX, signUnderlineY);
                 }
                 SizeF sigTextSize = graphics.MeasureString(issuer, sigFontBold);
-                float issuerTextX = signUnderlineStartX + (signUnderlineEndX - signUnderlineStartX - sigTextSize.Width) / 2 + 5;
-                graphics.DrawString(issuer, sigFontBold, brushUName, issuerTextX, signUnderlineY + 10);
+                float issuerTextX = signUnderlineStartX + (signUnderlineEndX - signUnderlineStartX - sigTextSize.Width) / 2 + 5 * scaleX;
+                graphics.DrawString(issuer, sigFontBold, brushUName, issuerTextX, signUnderlineY + 10 * scaleY);
 
-                //graphics.DrawString(issuer, sigFontBold, brushUName, width - sigTextSize.Width / 2, 320);
-
+                string fileName = $"cert_{username}_{subject}.png";
 
                 // Save the bitmap
-                // TODO: upload this generated bitmap to supabase
-                bitmap.Save("..\\..\\..\\course_certificate.png");
+                var stream = new MemoryStream();
+                bitmap.Save(stream, ImageFormat.Png);
+                stream.Position = 0;
+
+                IFormFile file = new FormFile(stream, 0, stream.Length, "certificate", fileName)
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = "image/png"
+                };
+                return file;
             }
         }
 
@@ -207,5 +217,10 @@ namespace Repository.CustomFunctions.CertificateGenerator
 
             return destImage;
         }
+
+        /*public static async Task<IFormFile> ToIFormFile(this Bitmap bitmap, string fileName)
+        {
+                
+        }*/
     }
 }

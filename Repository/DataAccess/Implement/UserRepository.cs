@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Project_Cursus_Group3.Data;
+using Repository.CustomFunctions.CertificateGenerator;
 using Repository.CustomFunctions.SupabaseFileUploader;
 using Repository.Data;
 using Repository.Data.Entities;
@@ -32,13 +33,19 @@ namespace Repository.DataAccess.Implement
             _fileUploader = fileUploader;
         }
 
-        public async Task<string> GenerateCertificate(string username, string subject)
+        public async Task<string> CreateCertificate(string username, string subject)
         {
             if(username == null || subject == null)
             {
                 return "Missing information!";
             }
-
+            var file = await GenerateCertificate.CertificateGenerator(username, subject);
+            if(file == null)
+            {
+                return "Certification generation failure!";
+            }
+            var result = await _fileUploader.UploadImageMemStreamAsync(file, "Certificate");
+            return result;
         }
 
         public async Task<IEnumerable<UserViewModel>> GetAllUserAsync()
