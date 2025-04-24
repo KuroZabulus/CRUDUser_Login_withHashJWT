@@ -43,6 +43,7 @@ TODO list:
 - [ ] CRUD functions and other misc. functions for all objects
 - [ ] Create a live chathub using either SignalR or Kafka
 - [ ] Upload pictures and files to another database like firebase
+- [ ] Dockerize/Containerize the app
 - [ ] Setup CI/CD pipeline
 - [ ] Deploy the app in Swagger form
 - [ ] Develop a front-end 
@@ -52,6 +53,8 @@ TODO list:
 - [ ] Change some object's database ID scheme to use UID
 - [ ] Paging for GET functions
 - [ ] Research and implement payment functions and transactions management
+- [ ] Convert this entire project towards a less monolithic/multi-tier structure to a microservice architecture
+(yes that means i have to learn other language cuz microserv does work with multiple language)
 - [ ] TBA...
 
 > [!NOTE]
