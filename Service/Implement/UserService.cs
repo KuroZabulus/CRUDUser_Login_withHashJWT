@@ -19,9 +19,9 @@ namespace Service.Implement
             this.userRepository = userRepository;
         }
 
-        public Task<string> GenerateCertificate(string username, string subject)
+        public Task<string> CreateCertificate(string username, string subject)
         {
-            return userRepository.GenerateCertificate(username, subject);
+            return userRepository.CreateCertificate(username, subject);
         }
 
         public Task<IEnumerable<UserViewModel>> GetAllUserAsync()

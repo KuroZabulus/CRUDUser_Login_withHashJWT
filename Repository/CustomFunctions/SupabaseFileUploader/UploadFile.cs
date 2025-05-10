@@ -23,7 +23,7 @@ namespace Repository.CustomFunctions.SupabaseFileUploader
                 };*/
 
                 var supabase = new Supabase.Client(url, key, null);
-                //await supabase.InitializeAsync();
+                await supabase.InitializeAsync();
 
                 var imagePath = Path.Combine("Image", file.FileName);
 
@@ -31,6 +31,47 @@ namespace Repository.CustomFunctions.SupabaseFileUploader
                 await supabase.Storage
                   .From("TestBucket")
                   .Upload(await file.GetBytesAsync(), imagePath, new Supabase.Storage.FileOptions { CacheControl = "3600", Upsert = false });
+
+                //make sure the bucket you're connecting to is a public bucket (dropdown and make public)
+                //return public bucket link
+                var imageUrl = supabase.Storage
+                                            .From("TestBucket")
+                                            .GetPublicUrl(imagePath);
+                return imageUrl;
+            }
+            catch (Exception ex)
+            {
+                return "\nDetail: " + ex.Message;
+            }
+        }
+
+        public async Task<string> UploadImageMemStreamAsync(IFormFile file, string folderName)
+        {
+            try
+            {
+                var url = config["Supabase:Url"];
+                var key = config["Supabase:PrivateKey"];
+
+                /*var options = new Supabase.SupabaseOptions
+                {
+                    AutoConnectRealtime = true
+                };*/
+
+                var supabase = new Supabase.Client(url, key, null);
+                await supabase.InitializeAsync();
+
+                var imagePath = Path.Combine(folderName, file.FileName);
+
+                //upload file to bucket via supabase url and secret key (dont need s3 key)
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    memoryStream.Position = 0;
+
+                    await supabase.Storage
+                        .From("TestBucket")
+                        .Upload(memoryStream.ToArray(), imagePath, new Supabase.Storage.FileOptions { CacheControl = "3600", Upsert = false });
+                }
 
                 //make sure the bucket you're connecting to is a public bucket (dropdown and make public)
                 //return public bucket link

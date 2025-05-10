@@ -139,7 +139,7 @@ namespace CRUDUser_Login_withHashJWT.Controllers
                     _unitOfWork.RollbackTransaction();
                     throw new ArgumentException("Missing argument!");
                 }
-                var result = await _userService.GenerateCertificate(username, subject);
+                var result = await _userService.CreateCertificate(username, subject);
                 return Ok(result);
             }
             catch (Exception ex)
